@@ -8,27 +8,52 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    ViewGroup myLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        myLayout = findViewById(R.id.myLayout);
+
+        myLayout.setOnTouchListener(
+            new RelativeLayout.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    moveButton();
+                    return true;
+                }
             }
-        });
+        );
+    }
+
+    public void moveButton() {
+        View myButton = findViewById(R.id.myButton);
+
+        RelativeLayout.LayoutParams positionRules = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        positionRules.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+
+        myButton.setLayoutParams(positionRules);
+
+        // code for expanding the button
+        ViewGroup.LayoutParams sizeRules = myButton.getLayoutParams();
+        sizeRules.width = 450;
+        sizeRules.height = 300;
+        myButton.setLayoutParams(sizeRules);
     }
 
     @Override
