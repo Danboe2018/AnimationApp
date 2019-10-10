@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.transition.TransitionManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveButton() {
+        TransitionManager.beginDelayedTransition(myLayout);
         View myButton = findViewById(R.id.myButton);
 
         RelativeLayout.LayoutParams positionRules = new RelativeLayout.LayoutParams(
